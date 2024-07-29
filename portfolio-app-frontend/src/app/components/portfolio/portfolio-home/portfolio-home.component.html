@@ -1,0 +1,87 @@
+<clr-alert [clrAlertType]="alertType" [clrAlertAppLevel]="true" *ngIf="showAlertMessage">
+  <clr-alert-item>
+    <span class="alert-text">{{ alertMessage }}</span>
+  </clr-alert-item>
+</clr-alert>
+
+<div class="clr-row add-btn-position">
+  <div class="clr-col-10">
+    <h1>Assets</h1>
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-primary add-btn-position" (click)="addAsset()">+ Add Asset</button>
+  </div>
+  <div class="clr-col-1">
+    <button class="btn btn-primary add-btn-position" (click)="retrieveModal=true">* Retrieve Asset</button>
+  </div>
+</div>
+
+<div class="clr-row">
+  <div class="clr-col-12">
+    <clr-datagrid>
+      <clr-dg-column>Id</clr-dg-column>
+      <clr-dg-column>Name</clr-dg-column>
+      <clr-dg-column>Ticker</clr-dg-column>
+      <clr-dg-column>Exchange</clr-dg-column>
+      <clr-dg-column>ISIN</clr-dg-column>
+      <clr-dg-column>Website</clr-dg-column>
+      <clr-dg-row *clrDgItems="let asset of portfolios" [clrDgItem]="asset">
+        <clr-dg-action-overflow>
+          <button class="action-item" style="background: lightblue" (click)="editAsset(asset)">Edit Asset</button>
+          <button class="action-item" style="background: lightcoral" (click)="deleteConfirmAsset(asset)">Delete Asset
+          </button>
+        </clr-dg-action-overflow>
+        <clr-dg-cell>{{ asset.id }}</clr-dg-cell>
+        <clr-dg-cell>{{ asset.name }}</clr-dg-cell>
+        <clr-dg-cell>{{ asset.ticker }}</clr-dg-cell>
+        <clr-dg-cell>{{ asset.exchange }}</clr-dg-cell>
+        <clr-dg-cell>{{ asset.isin }}</clr-dg-cell>
+        <clr-dg-cell>{{ asset.website }}</clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+</div>
+
+<clr-modal [(clrModalOpen)]="opened" (clrModalOpenChange)="isAddAsset=false" [clrModalSize]="'lg'">
+  <div class="modal-title">{{ isAddAsset ? 'Add new' : 'Edit' }} asset</div>
+  <div class="modal-body">
+    <app-portfolio-add-edit
+      [portfolioToEdit]="_selectedAsset"
+      [submitForm]="clickSubmit"
+      (changeSubmitForm)="onAddEditModalClose($event)"
+      (alertMessage)="showAlert($event.messageType, $event.message)"
+      (isSubmitDisabled)="isSubmitDisabled=$event">
+    </app-portfolio-add-edit>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="opened = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="opened = false; clickSubmit = true"
+            [disabled]="isSubmitDisabled">
+      {{ isAddAsset ? 'Add Asset' : 'Save Asset' }}
+    </button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="confirmDelete" [clrModalSize]="'lg'">
+  <div class="modal-title">Delete Asset</div>
+  <div class="modal-body">Are you sure you want to delete Asset "{{ _selectedAsset?.name }}"?</div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="confirmDelete = false; SelectedAsset = null">Cancel</button>
+    <button class="btn btn-danger" (click)="confirmDelete = false; deleteAsset()">Delete</button>
+  </div>
+</clr-modal>
+
+<clr-modal [(clrModalOpen)]="retrieveModal" [clrModalSize]="'lg'">
+  <div class="modal-title">Retrieve asset by ID/ISIN</div>
+  <div class="modal-body">
+    <app-portfolio-retrieve [clickRetrieve]="clickRetrieve" (changeClickRetrieve)="clickRetrieve=$event"
+                            (isRetrieveDisabled)="isRetrieveDisabled=$event"></app-portfolio-retrieve>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline" (click)="retrieveModal = false">Cancel</button>
+    <button type="button" class="btn btn-primary" (click)="retrieveModal = false; clickRetrieve = true"
+            [disabled]="isRetrieveDisabled">
+      Retrieve
+    </button>
+  </div>
+</clr-modal>

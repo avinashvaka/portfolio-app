@@ -1,0 +1,43 @@
+<form class="clr-form clr-form-compact">
+  <div class="clr-form-control clr-row">
+    <label for="assetName" class="clr-control-label clr-col-12 clr-col-md-2 clr-required-mark">Asset name</label>
+    <div class="clr-control-container clr-col-18 clr-col-md-10">
+      <div class="clr-input-wrapper">
+        <input type="text" id="assetName" name="assetName" placeholder="please enter asset name" class="clr-input" [(ngModel)]="assetName" (ngModelChange)="validate()"/>
+      </div>
+    </div>
+  </div>
+  <div class="clr-form-control clr-row">
+    <label for="ticker" class="clr-control-label clr-col-12 clr-col-md-2 clr-required-mark">Ticker</label>
+    <div class="clr-control-container clr-col-12 clr-col-md-10">
+      <div class="clr-input-wrapper">
+        <input type="text" id="ticker" name="ticker" placeholder="Please enter ticker" class="clr-input" [(ngModel)]="ticker" (ngModelChange)="validate()"/>
+      </div>
+    </div>
+  </div>
+  <div class="clr-form-control clr-row">
+    <label for="exchange" class="clr-control-label clr-col-12 clr-col-md-2 clr-required-mark">Exchange</label>
+    <div class="clr-control-container clr-col-12 clr-col-md-10">
+      <div class="clr-input-wrapper">
+        <input type="text" id="exchange" name="exchange" placeholder="Please enter exchange" class="clr-input" [(ngModel)]="exchange" (ngModelChange)="validate()"/>
+      </div>
+    </div>
+  </div>
+  <div class="clr-form-control clr-row">
+    <label for="exchange" class="clr-control-label clr-col-12 clr-col-md-2 clr-required-mark">ISIN</label>
+    <div class="clr-control-container clr-col-12 clr-col-md-10">
+      <div class="clr-input-wrapper">
+        <input type="text" id="isin" name="isin" placeholder="Please enter isin" class="clr-input" [(ngModel)]="isin" (ngModelChange)="validate()"/>
+      </div>
+    </div>
+  </div>
+
+  <div class="clr-form-control clr-row">
+    <label for="website" class="clr-control-label clr-col-12 clr-col-md-2">Website</label>
+    <div class="clr-control-container clr-col-12 clr-col-md-10">
+      <div class="clr-input-wrapper">
+        <input type="text" id="website" name="website" placeholder="Please enter website" class="clr-input" [(ngModel)]="website" (ngModelChange)="validate()"/>
+      </div>
+    </div>
+  </div>
+</form>

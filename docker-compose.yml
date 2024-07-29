@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  frontend:
+    image: portfolio-frontend:latest
+    build:
+      context: ./portfolio-app-frontend
+    ports:
+      - "80:80"
+
+  backend:
+    image: portfolio-backend:latest
+    build:
+      context: ./portfolio-app-backend
+    ports:
+      - "8080:8080"

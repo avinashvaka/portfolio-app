@@ -1,0 +1,20 @@
+.login-card {
+  justify-content: center;
+  display: flex;
+}
+.card-vertical-align {
+  margin-top: 10% !important;
+}
+.card-horizontal-align {
+  width: 50%;
+  margin-left: 25%;
+}
+.login-register-btn {
+  display: grid;
+}
+.form-input-fields {
+  flex-direction: column;
+}
+.login-form {
+  margin-bottom: 10%;
+}

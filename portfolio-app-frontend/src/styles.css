@@ -1,0 +1,7 @@
+@import '@cds/core/global.min.css';
+@import '@cds/core/styles/theme.dark.min.css';
+@import '@clr/ui/clr-ui.min.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+

@@ -1,0 +1,39 @@
+<div class="clr-row login-card card-vertical-align">
+  <div class="clr-col-lg-5 clr-col-md-8 clr-col-12">
+    <div class="card card-horizontal-align">
+      <div class="card-header">{{isRegister?'Register':'Login'}}</div>
+      <clr-alert [clrAlertType]="'danger'" *ngIf="errorMessage" (clrAlertClosedChange)="clearMessages()">
+        <clr-alert-item>
+          <span class="alert-text">{{ errorMessage }}</span>
+        </clr-alert-item>
+      </clr-alert>
+      <clr-alert [clrAlertType]="'success'" *ngIf="successMessage" (clrAlertClosedChange)="clearMessages()">
+        <clr-alert-item>
+          <span class="alert-text">{{ successMessage }}</span>
+        </clr-alert-item>
+      </clr-alert>
+      <div class="card-block login-card">
+        <form clrForm class="login-form">
+          <clr-input-container class="form-input-fields">
+            <label>Username</label>
+            <input clrInput type="text" [(ngModel)]="username" name="username" />
+          </clr-input-container>
+          <clr-input-container class="form-input-fields">
+            <label>Password</label>
+            <input clrInput type="password" [(ngModel)]="password" name="password" />
+          </clr-input-container>
+        </form>
+      </div>
+      <div class="card-footer login-card">
+        <div *ngIf="!isRegister" class="login-register-btn">
+          <button class="btn btn-primary" [disabled]="!username || !password" (click)="login()">Login</button>
+          <button class="btn btn-sm btn-link" (click)="isRegister=true; clearMessages()">Click here to Register</button>
+        </div>
+        <div *ngIf="isRegister" class="login-register-btn">
+          <button class="btn btn-outline" [disabled]="!username || !password" (click)="register()">Register</button>
+          <button class="btn btn-sm btn-link" (click)="isRegister=false; clearMessages()">Click here to Login</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
